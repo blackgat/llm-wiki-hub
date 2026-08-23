@@ -143,6 +143,8 @@ Never edit the original: `raw/` is append-only.
    schema is already loaded — auto-loading is a tool feature, not a guarantee.
 3. **Search before creating.** Grep the topic first. Extend an existing page
    rather than opening a second one on the same subject.
+   The index also carries a **backlinks table** — use it to find which pages
+   already touch a subject before opening a new one.
 4. Run the three gates on every new fact. Land `raw/` first, then the wiki.
    Filter secrets at capture time.
 5. Write the page; update `updated` and `summary`. Mark unverified inferences.

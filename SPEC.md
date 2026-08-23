@@ -295,7 +295,9 @@ At tens to hundreds of pages, a generated index replaces embedding
 infrastructure entirely: cheap, auditable, no extra service, always consistent
 with the tree.
 
-1. **Read the index** — one file: what exists, where, how fresh.
+1. **Read the index** — one file: what exists, where, how fresh, and who links
+   to whom. The backlinks table answers "what else touches this subject"
+   without opening anything.
 2. **Text search** — narrow to a handful of pages.
 3. **Read those pages** — follow internal links one hop; answer with precise
    locations and retrieval times.
@@ -348,7 +350,8 @@ check *is* the CI. It is an ordinary agent (I2); where it runs does not matter.
 - Contradiction — two pages, same subject, different conclusions
 - Duplication — the same subject opened twice
 - Staleness — `updated` or a provenance timestamp too old
-- Orphan page — no inbound internal link
+- Orphan page — no inbound internal link (the generator reports these; an
+  entry point legitimately has none, so this is a warning, not an error)
 - Orphan copy — a file in `raw/` no page references
 
 **Enforcing admission.** Prose rules in the schema are soft: an agent under time
