@@ -323,11 +323,28 @@ identical. One real asymmetry exists: **whether the agent can run git itself.**
 | Shell-capable | direct file access to a clone | yes | schema auto-loads |
 | Tool-calls only | filesystem tool pointed at a clone | needs a VCS tool | avoid bridges that require an editor to be running |
 | Human + editor | the clone is the working directory | plugin does it | keep auto-sync on; auto-commit only where a restricted agent writes |
+| Human + editor | the clone is the working directory | plugin does it | see below — the only silent write path |
 | No file access | none | no | feed the index and pages via prompt; read-only |
 
 The fallback — letting a sync plugin sweep up an uncommitted write — works, but
 its commit messages are machine-generated, so it **violates I8**. Data stays
 correct; auditability does not.
+
+**An editor is the only client that can break I4 without anyone noticing.**
+Every other writer passes through the protocol; an editor writes on keystroke.
+Hiding `raw/` from its search and navigation removes the accident, but that
+exclusion is invisible to file-writing tools — it protects humans, not agents.
+Editors also default to storing pasted attachments at the repository root,
+outside every layer, so the attachment path has to be set deliberately. Watch
+for **more than one automatic-commit trigger**: a sync plugin may commit both on
+a timer and on file change, and disabling one leaves the other running.
+
+Before adding any editor plugin, ask whether it writes into the knowledge layer,
+whether it touches `raw/`, whether its writes are triggered by a person or by a
+schedule, and whether its output paths are configurable. A hardcoded output
+directory cannot be worked around. Plugins that only *read* frontmatter are
+always safe, and are unusually useful here: `type`, `updated`, and `summary` on
+every page is exactly what a query plugin needs.
 
 An agent whose working directory is *not* the hub hits three problems, all the
 same shape: the tool assumes the working directory is the subject. File access
@@ -351,7 +368,9 @@ check *is* the CI. It is an ordinary agent (I2); where it runs does not matter.
 - Duplication — the same subject opened twice
 - Staleness — `updated` or a provenance timestamp too old
 - Orphan page — no inbound internal link (the generator reports these; an
-  entry point legitimately has none, so this is a warning, not an error)
+  entry point legitimately has none, so this is a warning, not an error).
+  Count links from every page outside `raw/`, and count both link syntaxes — a
+  narrower definition invents orphans that are not orphans.
 - Orphan copy — a file in `raw/` no page references
 
 **Enforcing admission.** Prose rules in the schema are soft: an agent under time
@@ -397,6 +416,7 @@ wrong and the hub is inconvenient, not broken.
 | Auto-commit | on / off / selected nodes | On produces meaningless messages (violates I8); off strands restricted agents' writes. |
 | Timezone | UTC / one fixed local zone | Must be uniform hub-wide or lexical filename order stops matching time order. Local time has DST; UTC does not. |
 | Filenames | ASCII-only / unrestricted | Cross-platform sync and mobile git implementations vary in their handling of non-ASCII. |
+| Internal link syntax | wiki-style `[[…]]` / relative markdown | **Only wiki-style editors resolve `[[…]]`.** In a git host's web view or a phone browser they are inert text. Relative markdown links work in both. Choose by where pages are *read*, not where they are written. |
 | Token scope | single repository / account-wide | Sets the blast radius when an agent is compromised. **Use single-repository.** |
 | Source retention | forever / periodic archive | Forever is safest but degrades the index. Archiving must not break pointers. |
 | Health-check frequency | per write / daily / weekly | More often finds problems sooner; an unsupervised agent running more often carries more risk. |

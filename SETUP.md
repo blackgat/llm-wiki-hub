@@ -219,6 +219,44 @@ It can still read and write files. Either give it a version-control tool, or
 accept that another writer commits on its behalf — and know that you lose
 attribution when that happens.
 
+### A human editor (Obsidian, Logseq, VS Code…)
+
+An editor is a client too, and the most dangerous one — it is the **only
+component that can violate the append-only rule silently**. Every other writer
+goes through the protocol; an editor auto-saves the moment a key is pressed.
+
+If a human will open this hub in an editor, configure these four things:
+
+| | Why |
+| --- | --- |
+| **Hide `raw/` from search and navigation** | Opening a source file and touching one key modifies it. No confirmation, no warning. Obsidian: Settings → Files and links → Excluded files |
+| **Set the attachment folder explicitly** | Editors default to the vault root, so a pasted screenshot lands outside every layer. Point it at the knowledge layer; observed captures still need to be filed into `raw/` by hand |
+| **Disable automatic commits** | Their messages are machine-generated and violate attribution. Check for **more than one trigger** — a plugin may commit both on a timer *and* on file change |
+| **Keep automatic pull, set it to rebase** | Pull is read-only and cuts conflicts. Merge-mode pulls fight the protocol's rebase |
+
+Two limits worth knowing:
+
+- **Hiding `raw/` protects humans, not agents.** An editor's exclusion list is
+  invisible to file-writing tools. Agents are held by the schema alone.
+- **Editor config is per-machine and does not sync.** Whatever ships inside the
+  repo (an exclusion list, say) travels; whatever lives in the plugin's own data
+  file does not. Repeat it on every machine.
+
+Before installing any plugin, run it past four questions:
+
+1. Does it **write into the knowledge layer**? Generated pages missing the
+   required frontmatter make step 6 of the protocol fail.
+2. Does it **touch `raw/`**? Nothing else enforces the append-only rule.
+3. Is its writing **user-triggered or scheduled**? Scheduled writing means no
+   attribution and collisions between machines.
+4. Are its **paths configurable**? A hardcoded output directory cannot be
+   dodged.
+
+A plugin that only *reads* frontmatter is always safe, and this design gives it
+unusual leverage: every page carries `type`, `updated`, and `summary`, so query
+plugins can render live views — including a staleness list, which is one of the
+health checks in §10 of the spec.
+
 ---
 
 ## 5. Report back

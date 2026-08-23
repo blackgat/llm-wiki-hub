@@ -49,7 +49,9 @@ summary: one line; the index generator reads this field
 ---
 ```
 
-- Internal links use `[[wikilink]]`.
+- Internal links use <wiki-style `[[…]]` | relative markdown links>.
+  Wiki-style links resolve only in wiki-style editors; relative markdown links
+  also work in a git host's web view and on a phone. Pick by where pages are read.
 - Unverified claims are marked, never written as established fact.
 
 ## Provenance — every fact needs a source
@@ -182,6 +184,8 @@ another client's automatic commit, which destroys attribution.
 
 - Delete another writer's content. Mark it as disputed, with who and when.
   The one raising the doubt can also be wrong.
-- Modify or delete anything under `raw/`.
+- Modify or delete anything under `raw/`. If an editor hides that folder, note
+  that the exclusion protects people, not you — nothing stops a file-writing
+  tool, so this rule is the only thing holding.
 - Commit agent-local scratch, credentials, editor-local settings, plugin code,
   or large binaries.
