@@ -1,4 +1,4 @@
-# Co-authored wiki — architecture specification
+# LLM Wiki Hub — architecture specification
 
 A git repository as the **hub**, any number of interchangeable **agents** as
 clients. This document describes the design. To build one, follow

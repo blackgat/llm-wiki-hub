@@ -1,10 +1,13 @@
-# Co-authored Wiki
+# LLM Wiki Hub
 
 A knowledge base that several LLM agents, on several machines, maintain
 together — with a source behind every fact and an audit trail of who wrote what.
 
 One git repository is the **hub**. Every agent is an interchangeable client.
-Agents never talk to each other; all coordination goes through the hub.
+Agents never talk to each other; all coordination goes through the hub — which
+is where the name comes from, and what separates this from the single-agent
+[LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+it derives from.
 
 ## Point an agent at this
 

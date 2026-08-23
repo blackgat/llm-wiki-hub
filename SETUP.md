@@ -1,4 +1,4 @@
-# SETUP.md — build a co-authored wiki hub
+# SETUP.md — build an LLM Wiki Hub
 
 **You are an agent. This file is your task.** Follow it top to bottom and you
 will have a working hub: a git repository that several agents on several
