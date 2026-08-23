@@ -1,0 +1,19 @@
+# Copy to <hub>/.gitattributes
+
+# Append-only log: keep both sides on merge, never conflict.
+LOG.md            merge=union
+
+# Layer 01 is a byte-faithful archive. Line-ending normalisation counts as
+# modification, so exclude it from text handling entirely.
+raw/**            -text
+
+# Everything else: one line ending across mixed-platform writers.
+*.md              text eol=lf
+
+# INDEX.md deliberately has NO merge driver.
+#
+# Do not add `INDEX.md merge=ours`. Git has no built-in `ours` merge driver, so
+# the line does nothing unless you also set merge.ours.driver — and if you do,
+# it silently picks a side and swallows the conflict, which is exactly what the
+# protocol must not happen: the agent then never learns to regenerate.
+# Let it conflict, and regenerate unconditionally after every sync.

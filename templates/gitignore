@@ -1,0 +1,25 @@
+# Copy to <hub>/.gitignore
+
+# Machine-local agent overrides. Shared settings belong in a tracked file;
+# anything holding a credential or a per-machine path does not.
+.claude/settings.local.json
+
+# Editor plugin code auto-updates independently on every node and produces
+# unmergeable binary diffs. Track the plugin *list*, never the plugin *code*.
+.obsidian/plugins/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Local caches and scratch. Agent-local state must not enter the hub.
+.cache/
+*.tmp
+*.swp
+*~
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+@eaDir/
