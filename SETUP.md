@@ -13,6 +13,10 @@ conflict resolution were run before this file was written.
 
 ---
 
+> **If the remote already contains `AGENTS.md`, stop and read
+> [`JOIN.md`](JOIN.md) instead.** That hub exists; you are joining it, not
+> building it. Several steps below are destructive once there is history.
+
 ## 0. Before you touch anything — ask
 
 Five questions. Three have safe defaults you may apply silently if the human is

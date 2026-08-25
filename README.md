@@ -22,6 +22,10 @@ three verifications before declaring success. Nothing in it is aspirational —
 the merge behaviour, the generator output, and the conflict resolution were all
 run before it was written.
 
+Adding a machine to a hub that already exists is a different task, with
+different verifications and a real chance of damaging what is already there.
+That one is [`JOIN.md`](JOIN.md).
+
 ## What you get
 
 ```
@@ -63,6 +67,7 @@ Full reasoning, including what this design deliberately does *not* solve:
 | Path | |
 | --- | --- |
 | [`SETUP.md`](SETUP.md) | agent-executable bootstrap |
+| [`JOIN.md`](JOIN.md) | agent-executable path for a machine joining a hub that already exists |
 | [`SPEC.md`](SPEC.md) | the architecture and its eight invariants |
 | [`templates/`](templates/) | schema, `.gitattributes`, `.gitignore` to copy into a new hub |
 | [`tools/build-index.py`](tools/build-index.py) | index generator; no dependencies |
