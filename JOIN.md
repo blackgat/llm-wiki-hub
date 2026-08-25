@@ -40,7 +40,8 @@ Then read, in this order: `AGENTS.md` (the schema — all of it), `INDEX.md`,
 and the tail of `LOG.md`.
 
 **Do not scaffold.** No `git init`, no copying from `templates/`, no filling in
-placeholders. `SETUP.md` §1 and §2 do not apply to you.
+placeholders. `SETUP.md` §1 and §2 do not apply to you — with one exception,
+noted in §3 below.
 
 > If `AGENTS.md` still contains `<PLACEHOLDER>` text, that hub was never
 > finished. Stop and say so. Writing into a half-filled schema is how two
@@ -141,7 +142,7 @@ you: working directory, file-access scope, `git -C <hub>`, and — if a human
 will open the hub in an editor — the editor rules, which are the dangerous
 part.
 
-Three things are specific to joining:
+Four things are specific to joining:
 
 - **The hub's location goes in this machine's configuration, never in the
   hub.** It is the one piece of shared state that legitimately sits outside.
@@ -149,6 +150,11 @@ Three things are specific to joining:
   hub that documents infrastructure often documents the machine you are joining
   from. Reuse its identifier in log lines and commit trailers; a second name
   for a machine the hub already knows splits its own audit trail.
+- **If your tool auto-loads an instruction file of its own, check the hub has
+  one.** The schema lives in `AGENTS.md`; a hub built by a different agent may
+  carry nothing your tool reads at launch. Adding the one-line pointer
+  ([`SETUP.md` §1](SETUP.md#1-scaffold) gives the form) is not scaffolding — it
+  admits a client, it does not change a convention.
 - **Editor and plugin configuration does not travel.** Whatever the schema says
   was configured — auto-commit disabled, an exclusion list, a sync mode — was
   applied on a different machine, and the file holding it is almost certainly
